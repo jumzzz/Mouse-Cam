@@ -444,7 +444,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimizeBox = false;
             this.Name = "FormHVMouse";
-            this.Text = "Hand Virtual Mouse";
+            this.Text = "Cam Mouse";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormHVMouse_FormClosing);
             this.Load += new System.EventHandler(this.FormHVMouse_Load);
             this.groupBox2.ResumeLayout(false);

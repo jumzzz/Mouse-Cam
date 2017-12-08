@@ -31,7 +31,7 @@ namespace Hand_Virtual_Mouse
 
         private Pen _pen = new Pen(Color.Red, 2);
         private List<Rectangle> _rectList = new List<Rectangle>();
-        private Capture _capture = null;
+        private VideoCapture _capture = null;
 
         private Point _roiBegin = new Point();
         private Point _roiEnd = new Point();
@@ -106,7 +106,7 @@ namespace Hand_Virtual_Mouse
             btnCapVid.Enabled = true;
             
             _capture = null;
-            _capture = new Capture(0);
+            _capture = new VideoCapture(0);
             int height = pictureBoxVideo.Size.Height;
             int width = pictureBoxVideo.Size.Width;
             _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps, 30);

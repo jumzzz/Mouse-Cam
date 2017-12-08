@@ -24,8 +24,8 @@ using Emgu.CV.Util;
 #region AFORGE_LIBS
 
 //using AForge;
-using AForge.Math.Geometry;
-using Accord.Imaging.Filters;
+//using AForge.Math.Geometry;
+//using Accord.Imaging.Filters;
 using Accord.MachineLearning;
 using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
@@ -172,11 +172,10 @@ namespace Hand_Virtual_Mouse
 
         private int _blurLevelNorm = 0;
         private ConvexHullDefects _chd = new ConvexHullDefects(25.0);
-        IConvexHullAlgorithm hullFinder = new GrahamConvexHull();
-
+        
         private Pen _pen = new Pen(Color.Red, 2);
         private List<Rectangle> _rectList = new List<Rectangle>();
-        private Capture _capture = null;
+        private VideoCapture _capture = null;
 
         
         private Image<Gray, Byte> _imgHistFilter;
@@ -1061,7 +1060,7 @@ namespace Hand_Virtual_Mouse
             #region camera_start
 
             _capture = null;
-            _capture = new Capture(0);
+            _capture = new VideoCapture(0);
 
             if (_capture.QueryFrame() != null)
             {

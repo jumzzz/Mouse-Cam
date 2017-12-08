@@ -13,10 +13,6 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Emgu.Util;
 
-using AForge;
-using AForge.Imaging;
-using AForge.Imaging.Filters;
-using Accord.Imaging.Filters;
 using System.Windows.Forms;
 
 
@@ -274,54 +270,6 @@ namespace Hand_Virtual_Mouse
         }
         
 
-        public static Image<Gray, Byte> HistSkinDetect(BGRTree skinTree, BGRTree nSkinTree, Image<Bgr, Byte> inputImg, int radius, int widthROI, int heightROI) 
-        {
-            Image<Gray, Byte> resultImg = new Image<Gray, Byte>(inputImg.Size);
-            
-
-            int height = resultImg.Height;
-            int width = resultImg.Width;
-
-            for (int i = 0; i < height; i++) 
-            {
-                for (int j = 0; j < width; j++) 
-                {
-                    Bgr bgrPix = inputImg[i, j];
-
-                    int probSkin = skinTree.GetFreq(bgrPix);
-
-                    if (probSkin > 0.0)
-                    {
-                        int probNSkin = nSkinTree.GetFreq(bgrPix);
-                        if (probSkin >= probNSkin)
-                            resultImg.Data[i, j, 0] = 255;
-                    }
-                            
-                }
-            }
-
-            Image<Gray,Byte> resultFinal = resultImg.Erode(widthROI);
-            
-            
-            if (radius > 0)
-            {
-                Bitmap resultBitmap = resultImg.ToBitmap();
-
-                Bitmap resultCopyBitmap = resultBitmap;
-                FastVariance fvFilter = new FastVariance(radius);
-                Bitmap fastVarBitmap = fvFilter.Apply(resultBitmap);
-                
-                Image<Gray, Byte> imgFastVar = new Image<Gray, Byte>(fastVarBitmap);
-                Image<Gray, Byte> imgFastVarFinal = 
-                imgFastVar.Dilate(heightROI);
-               
-                return imgFastVarFinal;
-            }
-
-            
-            return resultFinal;
-        }
-
         public static Image<Gray, Byte> DetectSkin(Image<Bgr, Byte> img, int erodeIter) 
         {
             Image<Hsv, Byte> currentHsvFrame = img.Convert<Hsv, Byte>();
@@ -340,45 +288,7 @@ namespace Hand_Virtual_Mouse
   
         }
         
-
-        public static Image<Gray, Byte> HistSkinDetectFromBG(BGRTree skinTree, BGRTree nSkinTree, Image<Bgr, Byte> inputImg)
-        {
-           // Image<Gray, Byte> resultImg = new Image<Gray, Byte>(inputImg.Size);
-
-            int height = inputImg.Height;
-            int width = inputImg.Width;
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    Bgr bgrPix = inputImg[i, j];
-
-                    double probSkin = skinTree.GetProb(bgrPix);
-
-                    if (probSkin > 0.0)
-                    {
-                        double probNSkin = nSkinTree.GetProb(bgrPix);
-                        if (probSkin < probNSkin)
-                            inputImg.Data[i, j, 0] = 0;
-                    }
-                    else inputImg.Data[i, j, 0] = 0;
-
-
-                }
-            }
-
-
-
-            Bitmap resultBitmap = inputImg.ToBitmap();
-            FastVariance fvFilter = new FastVariance(4);
-
-            Bitmap finalResult = fvFilter.Apply(resultBitmap);
-
-            Image<Gray, Byte> imgFinal = new Image<Gray, Byte>(finalResult);
-
-            return imgFinal;
-        }
+        
 
         private Rectangle GetLargestRect(Rectangle[] rects) 
         {
@@ -532,32 +442,8 @@ namespace Hand_Virtual_Mouse
 
 
 
-        public static PointF PointFToPoint(System.Drawing.Point pf)
-        {
-            return new PointF(((int)pf.X), ((int)pf.Y));
-        }
-
-        public static AForge.IntPoint PointToIntPoint(System.Drawing.Point pt) 
-        {
-            return new AForge.IntPoint(pt.X, pt.Y);
-        }
-
-        public static List<AForge.IntPoint> VecPoint2ListPoint(VectorOfPoint vp) 
-        {
-            List<AForge.IntPoint> pointList = new List<AForge.IntPoint>();
-
-            for (int i = 0; i < vp.Size; i++) 
-                pointList.Add(PointToIntPoint(vp[i]));
-            
-
-            return pointList;
-
-        }
-
-        public static System.Drawing.Point IntPointToSysPt(AForge.IntPoint ipt)
-        {
-            return new System.Drawing.Point(ipt.X, ipt.Y);
-        }
+        
+        
 
         public static Image<Gray, Byte> SkinDetectUsingRange(Image<Bgr, Byte> img, Hsv hsvMin, Hsv hsvMax, int erode, int dilate) 
         {

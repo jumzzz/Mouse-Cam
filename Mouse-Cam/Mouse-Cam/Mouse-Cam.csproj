@@ -26,9 +26,11 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
@@ -37,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,7 +58,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
     <Optimize>true</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -71,37 +74,33 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Accord\Framework\Release\net45\Accord.dll</HintPath>
+    <Reference Include="Accord, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.3.8.0\lib\net45\Accord.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Accord.Imaging, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Accord\Framework\Release\net45\Accord.Imaging.dll</HintPath>
+    <Reference Include="Accord.MachineLearning, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.MachineLearning.3.8.0\lib\net45\Accord.MachineLearning.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Accord.MachineLearning, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Accord\Framework\Release\net45\Accord.MachineLearning.dll</HintPath>
+    <Reference Include="Accord.Math, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.8.0\lib\net45\Accord.Math.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Accord.Math, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Accord\Framework\Release\net45\Accord.Math.dll</HintPath>
+    <Reference Include="Accord.Math.Core, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.8.0\lib\net45\Accord.Math.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Accord.Statistics, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Accord\Framework\Release\net45\Accord.Statistics.dll</HintPath>
+    <Reference Include="Accord.Statistics, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Statistics.3.8.0\lib\net45\Accord.Statistics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2012">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Emgu\bin\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
+    <Reference Include="Emgu.CV.UI, Version=3.3.0.2824, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EMGU.CV.3.3.0.2824\lib\net35\Emgu.CV.UI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Emgu.CV.UI">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Emgu\bin\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.UI.GL">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Emgu\bin\Emgu.CV.UI.GL.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.World">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Emgu\bin\Emgu.CV.World.dll</HintPath>
+    <Reference Include="Emgu.CV.World, Version=3.3.0.2824, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EMGU.CV.3.3.0.2824\lib\net35\Emgu.CV.World.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -116,8 +115,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Emgu\bin\ZedGraph.dll</HintPath>
+      <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +179,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,67 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="cublas64_75.dll" />
-    <Content Include="cudart64_75.dll" />
-    <Content Include="cufft64_75.dll" />
-    <Content Include="cvextern.dll" />
-    <Content Include="msvcp120.dll" />
-    <Content Include="msvcr120.dll" />
-    <Content Include="nppc64_75.dll" />
-    <Content Include="nppi64_75.dll" />
-    <Content Include="npps64_75.dll" />
-    <Content Include="opencv_aruco310.dll" />
-    <Content Include="opencv_bgsegm310.dll" />
-    <Content Include="opencv_calib3d310.dll" />
-    <Content Include="opencv_ccalib310.dll" />
-    <Content Include="opencv_core310.dll" />
-    <Content Include="opencv_cudaarithm310.dll" />
-    <Content Include="opencv_cudabgsegm310.dll" />
-    <Content Include="opencv_cudacodec310.dll" />
-    <Content Include="opencv_cudafeatures2d310.dll" />
-    <Content Include="opencv_cudafilters310.dll" />
-    <Content Include="opencv_cudaimgproc310.dll" />
-    <Content Include="opencv_cudalegacy310.dll" />
-    <Content Include="opencv_cudaobjdetect310.dll" />
-    <Content Include="opencv_cudaoptflow310.dll" />
-    <Content Include="opencv_cudastereo310.dll" />
-    <Content Include="opencv_cudawarping310.dll" />
-    <Content Include="opencv_cudev310.dll" />
-    <Content Include="opencv_datasets310.dll" />
-    <Content Include="opencv_dnn310.dll" />
-    <Content Include="opencv_face310.dll" />
-    <Content Include="opencv_features2d310.dll" />
-    <Content Include="opencv_ffmpeg310_64.dll" />
-    <Content Include="opencv_flann310.dll" />
-    <Content Include="opencv_fuzzy310.dll" />
-    <Content Include="opencv_highgui310.dll" />
-    <Content Include="opencv_imgcodecs310.dll" />
-    <Content Include="opencv_imgproc310.dll" />
-    <Content Include="opencv_line_descriptor310.dll" />
-    <Content Include="opencv_ml310.dll" />
-    <Content Include="opencv_objdetect310.dll" />
-    <Content Include="opencv_optflow310.dll" />
-    <Content Include="opencv_photo310.dll" />
-    <Content Include="opencv_plot310.dll" />
-    <Content Include="opencv_reg310.dll" />
-    <Content Include="opencv_rgbd310.dll" />
-    <Content Include="opencv_shape310.dll" />
-    <Content Include="opencv_stereo310.dll" />
-    <Content Include="opencv_stitching310.dll" />
-    <Content Include="opencv_structured_light310.dll" />
-    <Content Include="opencv_superres310.dll" />
-    <Content Include="opencv_surface_matching310.dll" />
-    <Content Include="opencv_text310.dll" />
-    <Content Include="opencv_tracking310.dll" />
-    <Content Include="opencv_video310.dll" />
-    <Content Include="opencv_videoio310.dll" />
-    <Content Include="opencv_videostab310.dll" />
-    <Content Include="opencv_xfeatures2d310.dll" />
-    <Content Include="opencv_ximgproc310.dll" />
-    <Content Include="opencv_xobjdetect310.dll" />
-    <Content Include="opencv_xphoto310.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -272,6 +211,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets" Condition="Exists('..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EMGU.CV.3.3.0.2824\build\Emgu.CV.targets'))" />
+    <Error Condition="!Exists('..\packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.0\build\Accord.targets'))" />
+  </Target>
+  <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -29,12 +29,12 @@ using Emgu.CV.Cuda;
 #region AFORGE_LIBS
 
 //using AForge;
-using AForge.Math.Geometry;
-using Accord.Imaging.Filters;
+//using AForge.Math.Geometry;
+//using Accord.Imaging.Filters;
 using Accord.MachineLearning;
 using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
-using Accord.Statistics.Kernels;
+//using Accord.Statistics.Kernels;
 
 
 #endregion
@@ -229,19 +229,6 @@ namespace Hand_Virtual_Mouse
             private ConfigImgProcVirtualMouse _configImgProc;
             private double _maxProb = 0.0;
            
-            private int _widthTrackPB = 0;
-            private int _heightTrackPB = 0;
-
-            private int _widthClick0PB = 0;
-            private int _heightClick0PB = 0;
-
-            private int _widthClick1PB = 0;
-            private int _heightClick1PB = 0;
-
-            private int _widthClick2PB = 0;
-            private int _heightClick2PB = 0;
-
-
             private MultiTemplate _mtOPN;
             private MultiTemplate _mtLFT;
             private MultiTemplate _mtRGT;
@@ -308,7 +295,8 @@ namespace Hand_Virtual_Mouse
             private FormUpdateSkinColor _formUpdateSkinColor = new FormUpdateSkinColor();
             private FormTemplateTrain _formTemplateTrain = new FormTemplateTrain();
         
-            private Capture _capture = null;
+            
+            private VideoCapture _capture = null;
 
             private Thread _threadHSDTrainer;
 
@@ -591,13 +579,6 @@ namespace Hand_Virtual_Mouse
                                     ThreadSafeSetPbBoxBgr(pictureBoxCam, _frameRT);
                                     ThreadSafeSetPbBoxGray(pictureBoxHSD, _imgHistFilterClone);
                                     ThreadSafeSetPbBoxBgr(pictureBoxDefect, _frameDefect);
-                                    //else if (tab.SelectedTab == tab.TabPages["tabPageTrack"]) ThreadSafeSetPbBoxBgr(pictureBoxTracking, _frameTracker);
-
-
-                                    //if (tab.SelectedTab == tab.TabPages["tabPageDefault"]) ThreadSafeSetPbBoxBgr(pictureBoxCam, _frameRT);
-                                    //else if (tab.SelectedTab == tab.TabPages["tabPageHSD"]) ThreadSafeSetPbBoxGray(pictureBoxHSD, _imgHistFilterClone);
-                                    //else if (tab.SelectedTab == tab.TabPages["tabPageDefect"]) ThreadSafeSetPbBoxBgr(pictureBoxDefect, _frameDefect);
-                                    //else if (tab.SelectedTab == tab.TabPages["tabPageTrack"]) ThreadSafeSetPbBoxBgr(pictureBoxTracking, _frameTracker);
 
                                 }
 
@@ -609,10 +590,6 @@ namespace Hand_Virtual_Mouse
                                 ErrorMessageMain(err);
                             }
                         
-                        //else if (rbHSD.Checked)
-                        //    if (this.Visible)
-                        //        ThreadSafeSetPbBoxGray(pictureBoxCam, _imgHistFilter);
-
                         double time_index = _capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.PosMsec);
                         double framenumber = _capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.PosFrames);
 
@@ -958,18 +935,6 @@ namespace Hand_Virtual_Mouse
 
                                     if (rectFinalValid)
                                     {
-                                        //Mat superSet = _frameDefect.Convert<Gray, Byte>().Mat;
-                                        //Mat template = new Mat(superSet, rectFinal);
-                                        //bool templateNull = _templateImg == null;
-                                        //bool trackValid = _currentProb < 75.0;
-                                        //bool roiTooSmall = (double)_rectFinalTemplate.Height / (double)_rectTracker.Height < 0.1;
-                                        //bool notOpen = _handStateInt != CLASSIFICATION_HAND_OPEN;
-
-                                        //bool templateValid = templateNull || trackValid || roiTooSmall || notOpen;
-                                        //if (templateValid) _templateImg = template.ToImage<Gray, Byte>();
-                                        //TemplateMatcher.TemplateMatch(_frameDefect.Convert<Gray, Byte>(), _templateImg, 0.5, ref _rectFinalTemplate, ref _currentProb);
-                                        //pt1Mouse = Geometry.RectangularCentroid(_rectFinalTemplate);
-
                                         _rectFinalTemplate = rectFinal;
                                         CvInvoke.Rectangle(_frameRT, _rectFinalTemplate, _mcvRed, 2);
 
@@ -977,30 +942,6 @@ namespace Hand_Virtual_Mouse
 
                                         TemplateMouseAction(handPrediction, labelPointHand);
 
-                                        //switch (handPrediction)
-                                        //{
-                                        //    case CLASSIFICATION_HAND_OPEN:
-                                        //        CvInvoke.PutText(_frameRT, "OPEN", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    case CLASSIFICATION_HAND_LEFT:
-                                        //        CvInvoke.PutText(_frameRT, "LEFT", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    case CLASSIFICATION_HAND_RIGHT:
-                                        //        CvInvoke.PutText(_frameRT, "RIGHT", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    case CLASSIFICATION_HAND_DOWN:
-                                        //        CvInvoke.PutText(_frameRT, "DOWN", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    case CLASSIFICATION_HAND_UP:
-                                        //        CvInvoke.PutText(_frameRT, "UP", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    case CLASSIFICATION_HAND_HALT:
-                                        //        CvInvoke.PutText(_frameRT, "HALT", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //    default:
-                                        //        CvInvoke.PutText(_frameRT, "NONE", labelPointHand, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                                        //        break;
-                                        //}
 
                                         List<double> featuresToBeLogged = new List<double>();
 
@@ -1034,14 +975,6 @@ namespace Hand_Virtual_Mouse
 
                         state = "Arm".ToUpper() + " Angle: " + Math.Round(_rectNew.Angle, 3).ToString();
                     }
-                    //else if (prediction == CLASSIFICATION_HAND2)
-                    //{
-                    //    //state = "reject".ToUpper() + " Angle: " + Math.Round(_rectNew.Angle, 3).ToString();
-
-                    //    //CvInvoke.PutText(_frameRT, state, _rectTracker.Location, FontFace.HersheyComplex, 0.6, _mcvBlue, 1);
-                    //    //CvInvoke.Rectangle(_frameRT, _rectTracker, _mcvBlack, 2);
-
-                    //}
 
                     else
                         state = "none".ToUpper();
@@ -1394,15 +1327,12 @@ namespace Hand_Virtual_Mouse
 
             Framesno = _capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.PosFrames);
 
-
             Image<Bgr, Byte> initImg = _capture.QueryFrame().ToImage<Bgr, Byte>();
             Image<Bgr, Byte> filteredImg = new Image<Bgr, Byte>(initImg.Size);
             _frameRT = new Image<Bgr, Byte>(initImg.Size);
             _frameImg = new Image<Bgr, Byte>(initImg.Size);
-           
-           
+                      
             filteredImg =initImg;
-
 
             if (checkBoxFlip.Checked)
             {
@@ -1433,7 +1363,6 @@ namespace Hand_Virtual_Mouse
             int offsetMainX = widthMain * finalOffsetX / widthImg;
             int offsetMainY = heightMain * finalOffsetY / heightImg;
 
-
             this.Cursor = new Cursor(Cursor.Current.Handle);
             int posX = Cursor.Position.X + offsetMainX;
             int posY = Cursor.Position.Y + offsetMainY;
@@ -1442,7 +1371,6 @@ namespace Hand_Virtual_Mouse
             if (posX > screenSize.Width) posX = screenSize.Width - 1;
             if (posY < 0) posY = 1;
             if (posY > screenSize.Height) posY = screenSize.Height - 1;
-
 
             Cursor.Position = new Point(posX, posY);
 
@@ -1503,7 +1431,7 @@ namespace Hand_Virtual_Mouse
             _mtSUP = new MultiTemplate(_configFile.FilePathSUP);
    
             _capture = null;
-            _capture = new Capture(0);
+            _capture = new VideoCapture(0);
 
             if (_capture.QueryFrame() != null)
             {
@@ -1888,7 +1816,7 @@ namespace Hand_Virtual_Mouse
                    
                     
                     
-                    CvInvoke.PutText(_frameRT, "O P E N", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Open", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
                     
                     _handStateInt = CLASSIFICATION_HAND_OPEN;
                    
@@ -1910,7 +1838,7 @@ namespace Hand_Virtual_Mouse
                     break;
                 case CLASSIFICATION_HAND_LEFT:
                  
-                    CvInvoke.PutText(_frameRT, "L E F T", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Left", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
 
                     _handStateInt = CLASSIFICATION_HAND_LEFT;
                     RightClickDecision();        
@@ -1928,7 +1856,7 @@ namespace Hand_Virtual_Mouse
                     break;
                 case CLASSIFICATION_HAND_RIGHT:
                  
-                    CvInvoke.PutText(_frameRT, "R I G H T", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Right", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
 
                     _handStateInt = CLASSIFICATION_HAND_RIGHT;
 
@@ -1948,7 +1876,7 @@ namespace Hand_Virtual_Mouse
                     break;
                 case CLASSIFICATION_HAND_DOWN:
 
-                    CvInvoke.PutText(_frameRT, "D O W N", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Down", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
                     
                     UpdateCoordinatesForMouse();
                 
@@ -1960,7 +1888,7 @@ namespace Hand_Virtual_Mouse
                     break;
                 case CLASSIFICATION_HAND_UP:
 
-                    CvInvoke.PutText(_frameRT, "U P", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Up", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
                     UpdateCoordinatesForMouse();
 
                     if (checkBoxScroll.Checked)
@@ -1971,7 +1899,7 @@ namespace Hand_Virtual_Mouse
                     break;
                 case CLASSIFICATION_HAND_HALT:
             
-                    CvInvoke.PutText(_frameRT, "H A L T", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "Halt", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
                     UpdateCoordinatesForMouse();
                     _isHalt = true;
 
@@ -1993,7 +1921,7 @@ namespace Hand_Virtual_Mouse
 
                     break;
                 default:
-                    CvInvoke.PutText(_frameRT, "N O N E", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
+                    CvInvoke.PutText(_frameRT, "None", _rectFinalTemplate.Location, FontFace.HersheyComplex, 0.7, _mcvBlue, 1);
                     break;
             }
         

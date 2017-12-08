@@ -8,8 +8,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 
-using AForge.Math.Geometry;
-using Accord.Imaging.Filters;
+//using AForge.Math.Geometry;
+//using Accord.Imaging.Filters;
 using Accord.MachineLearning;
 using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
